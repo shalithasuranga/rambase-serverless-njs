@@ -1,0 +1,8 @@
+{
+    "appname" : "rambase-serverless",
+    "appport" : "2018",
+    "mode" : "cloud",
+    "cloud" : {
+        "blacklist" : []
+    }
+}
