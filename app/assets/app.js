@@ -75,10 +75,13 @@ let App = {
 
     deploy : function() {
         App.writeYml().then((r) => {
+            document.getElementById('log').innerHTML = '<br/>yml created.<br/>Building image ...<br/><br/>';
             App.runCommand(0).then(() => {
+                document.getElementById('log').innerHTML += 'Image was built.<br/>Pushing image ...<br/><br/>'
                 App.runCommand(1).then(() => {
+                    document.getElementById('log').innerHTML += 'Image pushed to dh.<br/>Deploying function ...<br/><br/>'
                     App.runCommand(2).then(() => {
-                        alert('Function deployed!');
+                        document.getElementById('log').innerHTML += '<span style="color:green;font-weight:bold">Done<span/><br/><br/>'
                     }).catch(() => {
         
                     });
