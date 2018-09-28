@@ -58,9 +58,9 @@ let App = {
     runCommand : function(cmdId) {
         let proms = [];
         let commands = [
-            ('cd ' + baseSource + '; sudo faas-clid build -f ' + faasName + '.yml'),
-            ('cd ' + baseSource + '; sudo faas-clid push -f ' + faasName + '.yml'),
-            ('cd ' + baseSource + '; sudo faas-clid deploy -f ' + faasName + '.yml'),
+            ('cd ' + baseSource + '; sudo faas-cli build -f ' + faasName + '.yml'),
+            ('cd ' + baseSource + '; sudo faas-cli push -f ' + faasName + '.yml'),
+            ('cd ' + baseSource + '; sudo faas-cli deploy -f ' + faasName + '.yml'),
         ];
         return new Promise((resolve, reject) => {
                 setTimeout(() => {
