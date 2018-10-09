@@ -17,13 +17,23 @@ faasName = 'get-sales';
 const baseSource = 'generic-rambase-serverless';
 
 let App = {
+
+    showAlert : function(type, message) {
+        document.getElementById('log').innerHTML = '<span style="color: ' + (type == 'info' ? 'blue' : 'orange') + ';font-weight:bold">' + message + '<span/>';
+
+        setTimeout(() => {
+            document.getElementById('log').innerHTML = 'Ready.';
+        }, 3000);
+    },
     init : function() {
         App.loadFunctionSource();
     },
 
     loadFunctionSource : function() {
         Neutralino.filesystem.readFile(baseSource + '/serverless/ServerlessFunction.cs', (r) => {
-            document.getElementById('source').value = r.content;
+            editor.setValue(r.content);
+            editor.clearSelection();
+
         },
         () =>{
 
@@ -32,8 +42,8 @@ let App = {
     },
 
     saveFunctionSource : function() {
-        Neutralino.filesystem.writeFile(baseSource + '/serverless/ServerlessFunction.cs', document.getElementById('source').value, () => {
-            alert('File saved!');
+        Neutralino.filesystem.writeFile(baseSource + '/serverless/ServerlessFunction.cs', editor.getValue(), () => {
+            App.showAlert('info','File saved!');
         },
         () =>{
 
@@ -74,23 +84,34 @@ let App = {
     },
 
     deploy : function() {
-        App.writeYml().then((r) => {
-            document.getElementById('log').innerHTML = '<br/>yml created.<br/>Building image ...<br/><br/>';
-            App.runCommand(0).then(() => {
-                document.getElementById('log').innerHTML += 'Image was built.<br/>Pushing image ...<br/><br/>'
-                App.runCommand(1).then(() => {
-                    document.getElementById('log').innerHTML += 'Image pushed to dh.<br/>Deploying function ...<br/><br/>'
-                    App.runCommand(2).then(() => {
-                        document.getElementById('log').innerHTML += '<span style="color:green;font-weight:bold">Done<span/><br/><br/>'
+
+
+        if(document.getElementById('faasName').value == '') {
+            App.showAlert('error','Please enter function name!');
+        }
+        else {
+            App.writeYml().then((r) => {
+                document.getElementById('log').innerHTML = 'Building image ...';
+                App.runCommand(0).then(() => {
+                    document.getElementById('log').innerHTML = 'Pushing image ...';
+                    App.runCommand(1).then(() => {
+                        document.getElementById('log').innerHTML = 'Deploying function ...';
+                        App.runCommand(2).then(() => {
+                            document.getElementById('log').innerHTML = '<span style="color:green;font-weight:bold">Done<span/>';
+
+                            setTimeout(() => {
+                                document.getElementById('log').innerHTML = 'Ready.';
+                            }, 1000);
+                        }).catch(() => {
+            
+                        });
                     }).catch(() => {
-        
+
                     });
                 }).catch(() => {
-
                 });
-            }).catch(() => {
-            });
-        }).catch();
+            }).catch();
+        }
     }
 };
     

@@ -27,27 +27,59 @@ SOFTWARE. -->
   <head>
     <meta charset="UTF-8">
     <title>NeutralinoJs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/app.css">
   </head>
   <body>
     <div id="neutralinoapp">
-      <input type="text" id="faasName"/>
-      <button onClick="App.deploy();">Deploy</button>
 
-      <br/>
+      <nav class="navbar navbar-dark bg-dark">
+          <span class="navbar-brand mb-0 h1">Serverless Deployer</span>
+      </nav>
 
-      <span id="log" style="line-height: 2%;"></span>
 
-      Source  : <br/>
+      <div class="container-fluid">
 
-      <textarea id="source" style="width: 700px; height: 400px;"></textarea>
+          <br/>
+          <form class="form-inline" onSubmit="return false">
+              <div class="form-group mb-2">
+                <label>Function name</label>
+              </div>
+              <div class="form-group mx-sm-3 mb-2">
+                <input type="text" class="form-control" id="faasName" placeholder="foo-bar-serverless">
+              </div>
+              <button type="submit" class="btn btn-primary mb-2" onclick="App.deploy();">Deploy Now</button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button type="submit" class="btn btn-default mb-2" onclick="App.saveFunctionSource();">Save Source</button>
+
+              <div id="log">Ready.</div>
+          </form>
+          
+
+      </div>
 
       <hr/>
 
-      <button onClick = "App.saveFunctionSource();">Save</button>
+      <div class="container-fluid" style="margin: 0px; padding: 0px;">
+
+              <!--<textarea id="source" style="width: 100%; height: 400px;"></textarea>-->
+              <div style="width: 100%;height: 100%"><div id="editor"></div></div>
+
+      </div>
       
     </div>
     <script src="/neutralino.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/theme-dracula.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/mode-csharp.js"></script>
+
+    <script>
+      var editor = ace.edit("editor");
+      editor.setTheme("ace/theme/dracula");
+      editor.session.setMode("ace/mode/csharp");
+      editor.setFontSize(14);
+      editor.setAutoScrollEditorIntoView(true);
+    </script>
+
     <script src="/assets/app.js"></script>
 
   </body>

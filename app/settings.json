@@ -1,5 +1,12 @@
 {
     "appname" : "rambase-serverless",
     "appport" : "2018",
-    "mode" : "desktop"
+    "mode" : "desktop-window",
+    "cloud" : {
+        "blacklist" : []
+    },
+    "desktopwindow" : {
+        "height" : "700",
+        "width" : "1000"
+    }
 }
