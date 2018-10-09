@@ -6,4 +6,4 @@
 - `sudo ./neutralino`
 
 
-<img src="njsapp_preview.jpg"/>
+<img src="njsapp_preview.png"/>
