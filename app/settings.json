@@ -1,6 +1,6 @@
 {
     "appname" : "rambase-serverless",
-    "appport" : "2018",
+    "appport" : "8088",
     "mode" : "desktop-window",
     "cloud" : {
         "blacklist" : []
