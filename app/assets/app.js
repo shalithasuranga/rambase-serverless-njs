@@ -3,7 +3,7 @@ template = '';
 templateYml = `
 provider:
   name: faas
-  gateway: http://172.20.5.81:31112
+  gateway: http://172.20.22.102:31112
 
 functions:
   {func_name}:
